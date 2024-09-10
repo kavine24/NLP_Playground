@@ -1,0 +1,9 @@
+name: app
+channels:
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pip:
+    - numpy
+    - django
