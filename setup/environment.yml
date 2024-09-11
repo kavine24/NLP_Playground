@@ -1,4 +1,4 @@
-name: rag_playgrounds
+name: nlp`_playgrounds
 channels:
   - conda-forge
   - defaults
@@ -8,6 +8,8 @@ dependencies:
   - tqdm
   - jupyter
   - pip
+  - django
+  - openai
   - pip:
     - torch
     - torchtext
