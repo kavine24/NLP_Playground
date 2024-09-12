@@ -1,0 +1,10 @@
+name: server
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - matplotlib
+  - tqdm
+  - pip
+  - django

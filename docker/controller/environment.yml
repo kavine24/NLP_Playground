@@ -1,4 +1,4 @@
-name: nlp`_playgrounds
+name: nlp_playgrounds
 channels:
   - conda-forge
   - defaults
@@ -20,3 +20,4 @@ dependencies:
     - pydantic
     - ollama
     - langchain
+    - qdrant_client

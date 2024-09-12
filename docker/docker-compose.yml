@@ -1,0 +1,18 @@
+services:
+  server:
+    build: 
+      context: server/.
+    container_name: server-container
+    ports:
+      - 8000:8000
+    volumes:
+      - ../server:/root/server
+
+  database: 
+    image: qdrant/qdrant
+    container_name: database_container
+    ports:
+      - 6333:6333
+      - 6334:6334
+    volumes:
+      - ../database/qdrant_storage:/qdrant/storage:z
