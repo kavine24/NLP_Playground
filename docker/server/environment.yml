@@ -1,9 +1,17 @@
 name: server
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - python
-  - matplotlib
-  - tqdm
   - pip
   - django
+  - pip:
+    - numpy
+    - spacy
+    - pandas
+    - pydantic
+    - ollama
+    - langchain
+    - qdrant_client
+    - pypdf

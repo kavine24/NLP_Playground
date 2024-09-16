@@ -1,13 +1,15 @@
 services:
-  server:
-    build: 
-      context: server/.
-    container_name: server-container
-    ports:
-      - 8000:8000
-    volumes:
-      - ../server:/root/server
-
+  # server:
+  #   build: 
+  #     context: server/.
+  #   container_name: server-container
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ../server:/root/server
+  #   stdin_open: true # docker run -i
+  #   tty: true        # docker run -t
+    
   database: 
     image: qdrant/qdrant
     container_name: database_container

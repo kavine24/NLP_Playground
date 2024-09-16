@@ -6,4 +6,6 @@ WORKDIR /root
 
 RUN conda env create -f environment.yml
 
-EXPOSE 8000
+COPY setup.py /root/setup.py
+
+RUN conda run -n server python setup.py
