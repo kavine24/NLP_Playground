@@ -6,6 +6,5 @@ WORKDIR /root
 
 RUN conda env create -f environment.yml
 
-COPY setup.py /root/setup.py
-
-RUN conda run -n server python setup.py
+# COPY setup.py /root/setup.py
+# RUN conda run -n server python setup.py

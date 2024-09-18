@@ -23,12 +23,13 @@ services:
     depends_on:
       - pgdb
 
-  # server:
-  #   build: 
-  #     context: server/.
-  #   container_name: server-container
-  #   ports:
-  #     - 8000:8000
-  #   volumes:
-  #     - ../server:/root/server
-  #   entrypoint: ['conda', 'run', '-n', 'server', 'python', '/root/server/manage.py', 'runserver', '0.0.0.0:8000']
+  server:
+    build: 
+      context: server/.
+    container_name: server-container
+    ports:
+      - 8000:8000
+    volumes:
+      - ../server:/root/server
+    working_dir: /root/server/
+    entrypoint: ['conda', 'run', '-n', 'server', 'python', 'manage.py', 'runserver', '0.0.0.0:8000']

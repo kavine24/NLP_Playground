@@ -11,7 +11,6 @@ dependencies:
     - spacy
     - pandas
     - pydantic
-    - ollama
-    - langchain
-    - qdrant_client
+    # - ollama
+    # - langchain
     - pypdf
