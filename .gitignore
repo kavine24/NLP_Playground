@@ -1,3 +1,2 @@
-database/qdrant_storage/aliases/
-database/qdrant_storage/collections
-database/qdrant_storage/raft_state.json
+database/pgadmin/
+database/pgdb/
