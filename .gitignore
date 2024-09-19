@@ -1,2 +1,3 @@
 database/pgadmin/
 database/pgdb/
+**/__pycache__/
