@@ -2,6 +2,7 @@ services:
 
   pgdb:
     image: pgvector/pgvector:pg16
+    container_name: pgdb-container
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -12,6 +13,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    container_name: pgadmin-container
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
       PGADMIN_DEFAULT_PASSWORD: temppass
@@ -24,12 +26,19 @@ services:
       - pgdb
 
   server:
+    #profiles: ["cli-only"]
     build: 
       context: server/.
     container_name: server-container
+    environment:
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_PASSWORD: admin
+      DJANGO_SUPERUSER_EMAIL: admin@admin.com
     ports:
       - 8000:8000
     volumes:
       - ../server:/root/server
+    depends_on:
+      - pgdb
     working_dir: /root/server/
-    entrypoint: ['conda', 'run', '-n', 'server', 'python', 'manage.py', 'runserver', '0.0.0.0:8000']
+    entrypoint: ['./start.sh']
