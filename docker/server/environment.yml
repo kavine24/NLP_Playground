@@ -12,6 +12,6 @@ dependencies:
     - pandas
     - pydantic
     - "psycopg[binary]"
-    # - ollama
-    # - langchain
+    - ollama
+    - langchain
     - pypdf
