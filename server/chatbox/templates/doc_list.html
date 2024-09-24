@@ -1,0 +1,48 @@
+{% extends "base.html"%}
+
+{% block title %}
+RAG Demo Chat Document List
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-8">
+
+        <div class="row justify-content-end">
+            <div class=" col-2">
+                <form action="/docs/upload" method="get">
+                    <button type="submit" class="btn btn-outline-success">New File</button>
+                </form>
+                
+            </div>
+        </div>
+        
+        <div class="row justify-content-start">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Size</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for doc in docs_list %}
+                    <tr>
+                        <td>{{ doc.doc_name }}</td>
+                        <td>lol1</td>
+                        <td>lol2</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+  </div>
+
+
+{% endblock %}

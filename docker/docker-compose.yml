@@ -7,12 +7,14 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
     volumes:
-      - ../database/pgdb:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
       - ./database/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     container_name: pgadmin-container
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
@@ -25,20 +27,23 @@ services:
     depends_on:
       - pgdb
 
-  server:
-    #profiles: ["cli-only"]
-    build: 
-      context: server/.
-    container_name: server-container
-    environment:
-      DJANGO_SUPERUSER_USERNAME: admin
-      DJANGO_SUPERUSER_PASSWORD: admin
-      DJANGO_SUPERUSER_EMAIL: admin@admin.com
-    ports:
-      - 8000:8000
-    volumes:
-      - ../server:/root/server
-    depends_on:
-      - pgdb
-    working_dir: /root/server/
-    entrypoint: ['./start.sh']
+  # server:
+  #   #profiles: ["cli-only"]
+  #   build: 
+  #     context: server/.
+  #   container_name: server-container
+  #   environment:
+  #     DJANGO_SUPERUSER_USERNAME: admin
+  #     DJANGO_SUPERUSER_PASSWORD: admin
+  #     DJANGO_SUPERUSER_EMAIL: admin@admin.com
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ../server:/root/server
+  #   depends_on:
+  #     - pgdb
+  #   working_dir: /root/server/
+  #   entrypoint: ['./start.sh']
+
+volumes:
+ pg-data:
