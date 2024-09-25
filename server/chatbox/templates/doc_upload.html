@@ -10,9 +10,12 @@ RAG Demo Upload Portal
 
     <div class="col-8">
 
-        <form action="/docs/uploader" method="post">
-            <label for="formFileMultiple" class="form-label">Files:</label>
-            <input class="form-control" type="file">
+        <form action="/docs/uploader" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            
+            <label for="formFile" class="form-label">Files:</label>
+            <input class="form-control" type="file", name="file-upload" required>
             <button type="submit" class="btn btn-outline-success">Upload</button>
         </form>
 

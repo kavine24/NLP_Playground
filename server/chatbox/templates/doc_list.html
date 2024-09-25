@@ -33,8 +33,8 @@ RAG Demo Chat Document List
                     {% for doc in docs_list %}
                     <tr>
                         <td>{{ doc.doc_name }}</td>
-                        <td>lol1</td>
-                        <td>lol2</td>
+                        <td>{{ doc.upload_time }}</td>
+                        <td>{{ doc.size}}MB</td>
                     </tr>
                     {% endfor %}
                 </tbody>
