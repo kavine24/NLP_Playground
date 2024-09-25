@@ -27,23 +27,23 @@ services:
     depends_on:
       - pgdb
 
-  server:
-    #profiles: ["cli-only"]
-    build: 
-      context: server/.
-    container_name: server-container
-    environment:
-      DJANGO_SUPERUSER_USERNAME: admin
-      DJANGO_SUPERUSER_PASSWORD: admin
-      DJANGO_SUPERUSER_EMAIL: admin@admin.com
-    ports:
-      - 8000:8000
-    volumes:
-      - ../server:/root/server
-    depends_on:
-      - pgdb
-    working_dir: /root/server/
-    entrypoint: ['./start.sh']
+  # server:
+  #   #profiles: ["cli-only"]
+  #   build: 
+  #     context: server/.
+  #   container_name: server-container
+  #   environment:
+  #     DJANGO_SUPERUSER_USERNAME: admin
+  #     DJANGO_SUPERUSER_PASSWORD: admin
+  #     DJANGO_SUPERUSER_EMAIL: admin@admin.com
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ../server:/root/server
+  #   depends_on:
+  #     - pgdb
+  #   working_dir: /root/server/
+  #   entrypoint: ['./start.sh']
 
 volumes:
  pgdb-data:
