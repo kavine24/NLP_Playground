@@ -26,6 +26,7 @@ RAG Demo Chat Document List
                         <th scope="col">Name</th>
                         <th scope="col">Created</th>
                         <th scope="col">Size</th>
+                        <th scope="col">Embedded</th>
                     </tr>
                 </thead>
 
@@ -34,7 +35,14 @@ RAG Demo Chat Document List
                     <tr>
                         <td>{{ doc.doc_name }}</td>
                         <td>{{ doc.upload_time }}</td>
-                        <td>{{ doc.size}}MB</td>
+                        <td>{{ doc.size }}MB</td>
+                        <td>
+                            {% if doc.embedding_status == 1 %} 
+                            &#9989;
+                            {% else %}
+                            &#10060;
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

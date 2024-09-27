@@ -1,5 +1,6 @@
 services:
 
+  # Postgres SQL DB and tool
   pgdb:
     image: pgvector/pgvector:pg16
     container_name: pgdb-container
@@ -27,24 +28,35 @@ services:
     depends_on:
       - pgdb
 
-  # server:
-  #   #profiles: ["cli-only"]
-  #   build: 
-  #     context: server/.
-  #   container_name: server-container
-  #   environment:
-  #     DJANGO_SUPERUSER_USERNAME: admin
-  #     DJANGO_SUPERUSER_PASSWORD: admin
-  #     DJANGO_SUPERUSER_EMAIL: admin@admin.com
-  #   ports:
-  #     - 8000:8000
-  #   volumes:
-  #     - ../server:/root/server
-  #   depends_on:
-  #     - pgdb
-  #   working_dir: /root/server/
-  #   entrypoint: ['./start.sh']
+  # Web server and background process server
+
+  broker:
+   image: redis
+   container_name: redis-broker-container
+   ports:
+    - 6379:6379
+   volumes:
+    - redis-broker-data:/data
+
+
+  server:
+    build: 
+      context: server/.
+    container_name: web-server-container
+    environment:
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_PASSWORD: admin
+      DJANGO_SUPERUSER_EMAIL: admin@admin.com
+    ports:
+      - 8000:8000
+    volumes:
+      - ../server:/root/server
+    depends_on:
+      - pgdb
+    working_dir: /root/server/
+    entrypoint: ['./start.sh']
 
 volumes:
  pgdb-data:
  pg-admin-data:
+ redis-broker-data:

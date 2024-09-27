@@ -7,11 +7,21 @@ dependencies:
   - pip
   - django
   - pip:
+    # base
     - numpy
-    - spacy
-    - pandas
     - pydantic
+    
+    # postgres for python and django
     - "psycopg[binary]"
+    # pgvector for python
+    - pgvector
+    
+    # nlp packages for main functionality
     - ollama
     - langchain
+    - langchain-community
+  
     - pypdf
+    
+    # for django to run background tasks
+    - celery[redis]

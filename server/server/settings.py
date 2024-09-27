@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'pgdb',
         'PORT': '5432',
 
     }
@@ -132,3 +132,7 @@ MEDIA_ROOT = 'media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CELERY CONFIGURATIONS
+CELERY_BROKER_URL = 'redis://broker'
