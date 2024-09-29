@@ -31,13 +31,22 @@ services:
   # Web server and background process server
 
   broker:
-   image: redis
-   container_name: redis-broker-container
-   ports:
-    - 6379:6379
-   volumes:
-    - redis-broker-data:/data
-
+    image: redis
+    container_name: redis-broker-container
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-broker-data:/data
+    environment: 
+      REDIS_PASSWORD: secret
+  
+  redis-insight:
+    image: redis/redisinsight:latest
+    restart: always
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis-insight-data:/data
 
   server:
     build: 
@@ -60,3 +69,4 @@ volumes:
  pgdb-data:
  pg-admin-data:
  redis-broker-data:
+ redis-insight-data:

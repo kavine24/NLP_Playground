@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # CELERY CONFIGURATIONS
-CELERY_BROKER_URL = 'redis://broker'
+CELERY_BROKER_URL = 'redis://broker:6379/0s'
