@@ -25,6 +25,14 @@ services:
     environment: 
       REDIS_PASSWORD: secret
   
+  # Model Host
+  llm:
+    build: 
+      context: models/.
+    container_name: llm-container
+    ports:
+      - 11434:11434
+
   # # Web Server
   # server:
   #   build: 
@@ -44,31 +52,35 @@ services:
   #   working_dir: /root/server/
   #   entrypoint: ['./start.sh']
 
-  # DB tools
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin-container
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
-      PGADMIN_DEFAULT_PASSWORD: temppass
-      PGADMIN_LISTEN_PORT: 80
-    ports:
-      - 15432:80
-    volumes:
-      - pg-admin-data:/var/lib/pgadmin
-    depends_on:
-      - pgdb
+
+
+  # # DB tools
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   container_name: pgadmin-container
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+  #     PGADMIN_DEFAULT_PASSWORD: temppass
+  #     PGADMIN_LISTEN_PORT: 80
+  #   ports:
+  #     - 15432:80
+  #   volumes:
+  #     - pg-admin-data:/var/lib/pgadmin
+  #   depends_on:
+  #     - pgdb
   
-  redis-insight:
-    image: redis/redisinsight:latest
-    container_name: redis-insight-container
-    restart: always
-    ports:
-      - "5540:5540"
-    volumes:
-      - redis-insight-data:/data
-    depends_on:
-      - broker
+  # redis-insight:
+  #   image: redis/redisinsight:latest
+  #   container_name: redis-insight-container
+  #   restart: always
+  #   ports:
+  #     - "5540:5540"
+  #   volumes:
+  #     - redis-insight-data:/data
+  #   depends_on:
+  #     - broker
+
+
 
 volumes:
  pgdb-data:

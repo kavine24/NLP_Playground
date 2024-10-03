@@ -5,10 +5,24 @@ from .models import Documents
 from .tasks import embed_document, generate_reponse
 
 import sys
+import json
 
 # Create your views here.
 def chat(request):
     return render(request, 'chatbox.html')
+
+def generate_llm_response(request):
+    if request.META['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest':
+        data = json.load(request)
+        query = data.get('query')
+        
+        response = {'response': generate_reponse(query)}
+
+        return HttpResponse(json.dumps(response),
+            content_type='application/json')
+
+    return render(request, 'chatbox.html')
+
 
 def doc_list(request):
     docs_list = Documents.objects.all()

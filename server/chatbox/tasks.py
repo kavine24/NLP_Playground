@@ -11,17 +11,15 @@ from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_core.prompts import PromptTemplate
-
-import ollama
+from langchain_community.llms.ollama import Ollama
 
 from .models import Documents, ContextDocs
 
 from celery import shared_task
 
+OLLAMA_URL = 'http://localhost:11434'
 @shared_task
 def embed_document(document_id):
-    print('here' + str(document_id), file=sys.stderr)
-    print(os.getcwd())
     # get document
     doc = Documents.objects.get(doc_id=document_id)
 
@@ -36,6 +34,7 @@ def embed_document(document_id):
                                             chunk_overlap=50)
 
     embedder = OllamaEmbeddings(
+        base_url=OLLAMA_URL,
         model="llama3"
     )
 
@@ -59,14 +58,11 @@ def embed_document(document_id):
     doc.embedding_status = True
     doc.save()
 
-@shared_task
 def generate_reponse(query):
-    pass
     # embedder = OllamaEmbeddings(
+    #     base_url=OLLAMA_URL,
     #     model="llama3"
     # )
-
-    # query = 'What are the recent advancements in computer vision'
 
     # query_embedding = np.array(embedder.embed_query(query))
 
@@ -96,10 +92,13 @@ def generate_reponse(query):
 
     # print(formmatted_prompt)
 
+    llm_chat = Ollama(
+        base_url=OLLAMA_URL,
+        model="llama3"
+    )
 
-    # llm_response = ollama.generate(
-    #     model='llama3',
-    #     prompt=formmatted_prompt
-    # )
+    llm_response = llm_chat.invoke(
+        input=query
+    )
 
-    # print(llm_response['response'])
+    return llm_response['response']
