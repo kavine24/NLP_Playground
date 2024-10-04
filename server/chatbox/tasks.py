@@ -17,7 +17,8 @@ from .models import Documents, ContextDocs
 
 from celery import shared_task
 
-OLLAMA_URL = 'http://localhost:11434'
+OLLAMA_URL = 'http://llm:11434'
+
 @shared_task
 def embed_document(document_id):
     # get document
@@ -101,4 +102,4 @@ def generate_reponse(query):
         input=query
     )
 
-    return llm_response['response']
+    return llm_response

@@ -1,3 +1,4 @@
 database/pgadmin/
 database/pgdb/
 **/__pycache__/
+server/migrations/*

@@ -83,6 +83,7 @@ async function chat_button_onclick(){
   // Get message from ollama
   // TODO
   var url = '/chat/generate_response';
+
   fetch(url, {
     method: "POST",
     credentials: "same-origin",
@@ -94,10 +95,9 @@ async function chat_button_onclick(){
   })
   .then(response => response.json())
   .then(data => {
-    print(data)
     // Replace loader with message
-    placeholder.children[0].className = "col-8 p-3 shadow rounded bg-light"
-    // placeholder.children[0].innerHTML = data
+    placeholder.children[0].className = "col-8 p-3 shadow rounded bg-light";
+    placeholder.children[0].innerHTML = data['response'];
   });
 
   
