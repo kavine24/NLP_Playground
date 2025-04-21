@@ -59,6 +59,8 @@ def embed_document(document_id):
     doc.embedding_status = True
     doc.save()
 
+    return True
+
 def generate_reponse(query):
     # embedder = OllamaEmbeddings(
     #     base_url=OLLAMA_URL,

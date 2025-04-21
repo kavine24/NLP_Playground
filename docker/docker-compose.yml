@@ -1,6 +1,6 @@
 services:
 
-  # Postgres SQL DB and tool
+  # Postgres SQL DB
   pgdb:
     image: pgvector/pgvector:pg16
     container_name: pgdb-container
@@ -40,6 +40,20 @@ services:
               count: 1
               capabilities: [gpu]
 
+  # Celery Worker Node
+  # Copies Server config. Uses same codebase
+  worker:
+    build:
+      context: server/.
+    container_name: worker_container
+    volumes:
+      - ../server:/root/server
+    depends_on:
+      - pgdb
+      - broker
+    working_dir: /root/server/
+    command: conda run -n server celery --app=server worker --loglevel=INFO
+
   # Web Server
   server:
     build: 
@@ -56,12 +70,13 @@ services:
     depends_on:
       - pgdb
       - broker
+      - llm
+      - worker
     working_dir: /root/server/
     entrypoint: ['./start.sh']
 
-
-
-  # DB tools
+  # ============= Optional Tools ===============
+  # postgres
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin-container
@@ -75,18 +90,18 @@ services:
       - pg-admin-data:/var/lib/pgadmin
     depends_on:
       - pgdb
-  
-  redis-insight:
-    image: redis/redisinsight:latest
-    container_name: redis-insight-container
-    restart: always
+    
+  # Celery task viewer
+  flower:
+    image: mher/flower:0.9.7
+    container_name: celery-flower-container
+    environment:
+      - CELERY_BROKER_URL=redis://broker:6379
+      - FLOWER_PORT=8888
     ports:
-      - "5540:5540"
-    volumes:
-      - redis-insight-data:/data
+      - 8889:8888
     depends_on:
       - broker
-
 
 
 volumes:

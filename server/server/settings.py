@@ -135,4 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # CELERY CONFIGURATIONS
-CELERY_BROKER_URL = 'redis://broker:6379/0'
+CELERY_BROKER_URL = 'redis://broker:6379'
+CELERY_RESULT_BACKEND = "db+postgres://pgdb:5432/postgres"
