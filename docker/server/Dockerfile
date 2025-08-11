@@ -1,7 +1,7 @@
-FROM continuumio/anaconda
+FROM continuumio/anaconda3
 
 # Updates
-RUN apt update --allow-releaseinfo-change-suite -y && apt upgrade -y
+RUN apt update -y && apt upgrade -y
 RUN apt install curl wget -y
 
 # Build Virtual Env

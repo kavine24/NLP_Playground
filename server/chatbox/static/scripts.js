@@ -73,7 +73,7 @@ async function chat_button_onclick(){
 
   // Get chat area
   chat_log = document.getElementById("chat-log");
-
+  
   // Input users message and bots loading placeholder
   chat_log.appendChild(create_user_message(text_input));
 
@@ -100,7 +100,12 @@ async function chat_button_onclick(){
     placeholder.children[0].innerHTML = data['response'];
   });
 
-  
+  // Scrol the span down ---not working
+  console.log(chat_log)
+  if (chat_log && chat_log.closest('.scrollable-container')) {
+    chat_log.scrollIntoView({ behavior: "smooth", block: "end" });
+  }
+
   // Release text input to user
   chat_input.disabled = false;
 }

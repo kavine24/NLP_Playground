@@ -27,7 +27,7 @@ RAG Demo Chat
     <button id="chat-message-submit" class="btn w-100 btn-success" onclick="chat_button_onclick()">Send</button>
   </div>
 </div>
-
+{% csrf_token %}
 {% load static %}
 <script src="{% static 'scripts.js' %}"></script>
 
